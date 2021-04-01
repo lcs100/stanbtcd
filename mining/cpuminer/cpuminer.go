@@ -195,7 +195,7 @@ func (m *CPUMiner) submitBlock(block *btcutil.Block) bool {
 	totalCount += hashCount
 	if blockCount == 10000 {
 		log.Infof("count %v:", totalCount)
-		time.Sleep(time.Duration(60) * time.Second)
+		time.Sleep(time.Duration(120) * time.Second)
 	}
 	// The block was accepted.
 	coinbaseTx := block.MsgBlock().Transactions[0].TxOut[0]
