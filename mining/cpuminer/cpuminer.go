@@ -201,7 +201,7 @@ func (m *CPUMiner) submitBlock(block *btcutil.Block) bool {
 	if blockCount == 1000 {
 		log.Infof("count %v:", totalCount)
 		fd, _ := os.OpenFile("count.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
-		io.WriteString(fd, string(totalCount))
+		io.WriteString(fd, strconv.Itoa(120))
 		fd.Close()
 		time.Sleep(time.Duration(120) * time.Second)
 	}
