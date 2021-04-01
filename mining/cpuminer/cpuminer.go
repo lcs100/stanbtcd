@@ -8,6 +8,9 @@ import (
 	"errors"
 	"fmt"
 	"math/rand"
+	"os"
+	"strconv"
+	"strings"
 	"sync"
 	"time"
 
@@ -193,15 +196,25 @@ func (m *CPUMiner) submitBlock(block *btcutil.Block) bool {
 
 	blockCount += 1
 	totalCount += hashCount
+	log.Infof("block number: %v", blockCount)
 	if blockCount == 1000 {
 		log.Infof("count %v:", totalCount)
 		time.Sleep(time.Duration(120) * time.Second)
 	}
+	recordHash(float64(hashCount))
 	// The block was accepted.
 	coinbaseTx := block.MsgBlock().Transactions[0].TxOut[0]
 	log.Infof("Block submitted via CPU miner accepted (hash %s, "+
 		"amount %v)", block.Hash(), btcutil.Amount(coinbaseTx.Value))
 	return true
+}
+
+func recordHash(rate float64) {
+	fd, _ := os.OpenFile("rate.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
+	fd_content := strings.Join([]string{strconv.FormatFloat(rate, 'f', -1, 64), "\n"}, "")
+	buf := []byte(fd_content)
+	fd.Write(buf)
+	fd.Close()
 }
 
 // solveBlock attempts to find some combination of a nonce, extra nonce, and
