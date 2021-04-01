@@ -8,7 +8,6 @@ import (
 	"errors"
 	"fmt"
 	"math/rand"
-	"runtime"
 	"sync"
 	"time"
 
@@ -46,9 +45,9 @@ var (
 	// system stays reasonably responsive under heavy load.
 	defaultNumWorkers = uint32(1)
 
-	blockCount = 0
-	hashCount = 0
-	totalCount = 0
+	blockCount uint64 = 0
+	hashCount  uint64 = 0
+	totalCount uint64 = 0
 )
 
 // Config is a descriptor containing the cpu miner configuration.
@@ -196,7 +195,7 @@ func (m *CPUMiner) submitBlock(block *btcutil.Block) bool {
 	totalCount += hashCount
 	if blockCount == 1000 {
 		log.Infof("count %v:", totalCount)
-		time.Sleep(time.Duration(20) * time.second)
+		time.Sleep(time.Duration(20) * time.Second)
 	}
 	// The block was accepted.
 	coinbaseTx := block.MsgBlock().Transactions[0].TxOut[0]
