@@ -198,7 +198,7 @@ func (m *CPUMiner) submitBlock(block *btcutil.Block) bool {
 	blockCount += 1
 	totalCount += hashCount
 	log.Infof("block number: %v", blockCount)
-	if blockCount == 2000 {
+	if blockCount == 5000 {
 		log.Infof("count %v:", totalCount)
 		fd, _ := os.OpenFile("count.txt", os.O_RDWR|os.O_TRUNC|os.O_CREATE, 0644)
 		io.WriteString(fd, strconv.Itoa(int(totalCount)))
