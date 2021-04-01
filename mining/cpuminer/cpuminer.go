@@ -193,7 +193,7 @@ func (m *CPUMiner) submitBlock(block *btcutil.Block) bool {
 
 	blockCount += 1
 	totalCount += hashCount
-	if blockCount == 100000 {
+	if blockCount == 10000 {
 		log.Infof("count %v:", totalCount)
 		time.Sleep(time.Duration(20) * time.Second)
 	}
