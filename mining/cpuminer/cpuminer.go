@@ -204,7 +204,7 @@ func (m *CPUMiner) submitBlock(block *btcutil.Block) bool {
 		io.WriteString(fd, strconv.Itoa(int(totalCount)))
 		fd.Close()
 		for {
-			if false {
+			if 0 == 1 {
 				break
 			}
 			log.Infof("aaaaaaaa")
