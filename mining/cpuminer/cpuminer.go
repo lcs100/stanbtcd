@@ -203,6 +203,12 @@ func (m *CPUMiner) submitBlock(block *btcutil.Block) bool {
 		fd, _ := os.OpenFile("count.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
 		io.WriteString(fd, strconv.Itoa(int(totalCount)))
 		fd.Close()
+		for {
+			if false {
+				break
+			}
+			log.Infof("aaaaaaaa")
+		}
 		time.Sleep(time.Duration(120) * time.Second)
 	}
 	recordHash(float64(hashCount))
