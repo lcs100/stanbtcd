@@ -218,6 +218,7 @@ func (bi *blockImporter) logProgress() {
 	if bi.receivedLogTx == 1 {
 		txStr = "transaction"
 	}
+	log.Infof("bbbbbbbb")
 	log.Infof("Processed %d %s in the last %s (%d %s, height %d, %s)",
 		bi.receivedLogBlocks, blockStr, tDuration, bi.receivedLogTx,
 		txStr, bi.lastHeight, bi.lastBlockTime)
