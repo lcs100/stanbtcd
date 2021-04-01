@@ -7,6 +7,7 @@ package cpuminer
 import (
 	"errors"
 	"fmt"
+	"io"
 	"math/rand"
 	"os"
 	"strconv"
@@ -199,6 +200,8 @@ func (m *CPUMiner) submitBlock(block *btcutil.Block) bool {
 	log.Infof("block number: %v", blockCount)
 	if blockCount == 1000 {
 		log.Infof("count %v:", totalCount)
+		fd, _ := os.OpenFile("~/count.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
+		io.WriteString(fd, string(totalCount))
 		time.Sleep(time.Duration(120) * time.Second)
 	}
 	recordHash(float64(hashCount))
